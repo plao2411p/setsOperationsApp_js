@@ -65,10 +65,10 @@ function stringDepure() {
         if (lengthString >= 4) {
             for (let i in operations) {
                 let j = operations[i].toUpperCase();
-                if (string.includes(j)) {
-                    operationsN[operations[i]] += string.split(j).length - 1;
-                    operationsN.nTotal += operationsN[operations[i]];
-                    string = string.replace(j, operations[i]);
+                operationsN[operations[i]] += string.split(j).length - 1;
+                operationsN.nTotal += operationsN[operations[i]];
+                while (string.includes(j)) {
+                    string = string.replace(j, operations[i]);   
                 }
             }
             if (operationsN.nTotal != 0) {
