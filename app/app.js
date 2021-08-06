@@ -68,7 +68,7 @@ function stringDepure() {
                 operationsN[operations[i]] += string.split(j).length - 1;
                 operationsN.nTotal += operationsN[operations[i]];
                 while (string.includes(j)) {
-                    string = string.replace(j, operations[i]);   
+                    string = string.replace(j, operations[i]);
                 }
             }
             if (operationsN.nTotal != 0) {
@@ -143,17 +143,50 @@ function stringDepure() {
             return true;
         } else { return false; }
     }
-
     const checkOperations = () => {
         if (lengthString == 1) {
             return true;
         }
+        if (operations.includes(string.slice(0, 2))) {
+            return false;
+        }
+        if (operations.includes(string.slice(lengthString - 2, lengthString))) {
+            return false;
+        }
+        for (let i = 0; i < lengthString - 1; i++) {
+            if (sets.includes(string[i]) && sets.includes(string[i + 1])) {
+                return false;
+            }
+        }
+        if (lengthString == 4) {
+            if (sets.includes(string[0]) && sets.includes(string[lengthString - 1])) {
+                return true;
+            } else { return false; }
+        }
+        for (let i = 1; i < lengthString - 1; i++) {
+            if (sets.includes(string.slice(i, i + 2))) {
+                if (sets.includes(string[i - 1]) || string[i - 1] == "(" || string[i - 1] == ")") {
+                } else { return false; }
+                if (sets.includes(string[i + 2]) || string[i + 2] == "(" || string[i + 2] == ")") {
+                } else { return false; }
+            }
+        }
+        console.log(6)
+        return true;
     }
-
     if (noNumber()) {
+        console.log("No number");
         if (withOperations()) {
+            console.log("With operations");
             if (checkParentheses()) {
-                return true;    
+                console.log("Check parentheses");
+                if (checkOperations()) {
+                    console.log("Check operations");
+                    return true;
+                } else {
+                    string = "Mal ingreso de los parentesis o conjunto";
+                    return false;
+                }
             } else {
                 string = "Mal ingreso de los parentesis o conjunto";
                 return false;
