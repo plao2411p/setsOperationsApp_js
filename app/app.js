@@ -139,7 +139,6 @@ function stringDepure() {
                 leftCount += 1
             }
         }
-        console.log("le " + leftCount, "ri " + rightCount)
         if (leftCount + rightCount == 2 * operationsN.psOfPaN) {
             return true;
         } else { return false; }
