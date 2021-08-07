@@ -1,10 +1,8 @@
-//const math = require("mathjs");
+"use strict";
 
 /*Problem variables*/
 const sets = ["U", "A", "B", "C"];
 const operations = ["un", "in", "di", "ds"];
-var string = "(AunB)inC";
-var lengthString = string.length;
 /*ending on N means Number*/
 const operationsN = {
     un: 0,
@@ -21,15 +19,15 @@ const inPut = document.getElementById("InPut");
 const outPut = document.getElementById("OutPut");
 
 button.onclick = () => {
+    var string = inPut.value.toUpperCase().trim();
+    let bool;
     for (let i in operationsN) {
         operationsN[i] = 0;
     }
-    lengthString = 0;
-    string = inPut.value.toUpperCase().trim();
-    lengthString = string.length;
-    inPut.value = "";
+    //inPut.value = "";
     console.log("Before: " + string);
-    if (stringDepure()) {
+    bool, string = stringDepure(string);
+    if (bool) {
         console.log(string, operationsN);
         outPut.innerHTML = string;
     } else {
@@ -40,7 +38,9 @@ button.onclick = () => {
 
 /*String process*/
 
-function stringDepure() {
+function stringDepure(string) {
+    var string = string;
+    const lengthString = string.length;
 
     const noNumber = () => {
         for (let i = 0; i < 10; i++) {
@@ -173,43 +173,40 @@ function stringDepure() {
                 } else { return false; }
             }
         }
-        console.log(6)
         return true;
     }
     if (noNumber()) {
-        console.log("No number");
         if (withOperations()) {
-            console.log("With operations");
             if (checkParentheses()) {
-                console.log("Check parentheses");
                 if (checkOperations()) {
-                    console.log("Check operations");
-                    return true;
+                    return true, string;
                 } else {
-                    string = "Mal ingreso de los parentesis o conjunto";
-                    return false;
+                    return false, "Mal ingreso de los parentesis o conjunto";
                 }
             } else {
-                string = "Mal ingreso de los parentesis o conjunto";
-                return false;
+                return false, "Mal ingreso de los parentesis o conjunto";
             }
         } else {
-            string = "No ingresó una operación valida";
-            return false
+            return false, "No ingresó una operación valida";
         }
     } else {
-        string = "La operación no puede contener números";
-        return false
+        return false, "La operación no puede contener números";
     }
 }
 /* Operation process*/
 function range(start, end, step) {
     const ans = [];
     if (start < end && step > 0) {
+        if (step === undefined) {
+            step = 1;
+        }
         for (start; start < end; start += step) {
             ans.push(start);
         }
     } else if (start > end && step < 0) {
+        if (step === undefined) {
+            step = -1;
+        }
         for (start; start > end; start += step) {
             ans.push(start);
         }
@@ -222,11 +219,12 @@ const $sets = {
     B: range(2, 10, 2),
     C: range(3, 7, 1)
 }
-
+/*
     //console.log(df.print());
     //console.log(df["A"].values.slice(0, -1));
-    ;//df.addColumn( {"column": "F", "value": [1, 2] });
-stringOperations();
+    //;df.addColumn( {"column": "F", "value": [1, 2] });
+//stringOperations();
+
 function stringOperations() {
     const df = new dfd.DataFrame(
         math.boolean(math.zeros($sets.U.length, 4))._data,
@@ -244,7 +242,7 @@ function stringOperations() {
         { columns: ["position", "state"] }
     );
     console.log(string);
-    var count = 0;
+    let count = 0;
     range(1, lengthString, 1).forEach(i => {
         if (operations.includes(string.slice(i, i + 2))) {
             dataOperations.values[count][0] = i;
@@ -253,7 +251,7 @@ function stringOperations() {
     });
     const left = (i) => {
         range(i - 1, -1, -1).forEach(j => {
-            df.columns.forEach( k => {
+            df.columns.forEach(k => {
                 if (string.slice(j, i) == K) {
                     return string.slice(j, i)
                 }
@@ -268,7 +266,8 @@ function stringOperations() {
                     if (string[-1] == k) {
                         return string[-1];
                     }
-                } else if (string.slice(i + 2, j) == k) {
+                }
+                if (string.slice(i + 2, j) == k) {
                     return string.slice(i + 2, j);
                 }
             });
@@ -277,10 +276,19 @@ function stringOperations() {
     }
     dataOperations["position"].values[0] = 1;
     console.log(dataOperations.print());
+    operationsN.nTotal = 2;
     let nTotalCopy = operationsN.nTotal;
     let psOfPaNCopy = operationsN.psOfPaN;
+    for (const k in range(1, operationsN.nTotal + 1, 1)) {
+        dataOperations["position"].values.forEach(i => {
+            console.log("i: " + i);
+        });
+    }
+    //console.log(dataOperations);
+    //console.log(dataOperations["position"].data);
+    console.log(df.print());
 
-    /*for (const v in range(1, operationsN.nTotal + 1, 1)) {
+    for (const v in range(1, operationsN.nTotal + 1, 1)) {
 
-    }*/
-}
+ 
+}*/
