@@ -1,4 +1,8 @@
 "use strict";
+/*Html elements to intetact*/
+const button = document.getElementById("Button");
+const inPut = document.getElementById("InPut");
+const outPut = document.getElementById("OutPut");
 
 /*Problem variables*/
 const sets = ["U", "A", "B", "C"];
@@ -12,11 +16,6 @@ const operationsN = {
     nTotal: 0,
     psOfPaN: 0 // Pairs of parentheses N
 }
-
-/*Html elements to intetact*/
-const button = document.getElementById("Button");
-const inPut = document.getElementById("InPut");
-const outPut = document.getElementById("OutPut");
 
 button.onclick = () => {
     var string = inPut.value.toUpperCase().trim();
@@ -196,17 +195,14 @@ function stringDepure(string) {
 /* Operation process*/
 function range(start, end, step) {
     const ans = [];
+    if (start < end) {
+        step = 1;
+    } else { step = -1; }
     if (start < end && step > 0) {
-        if (step === undefined) {
-            step = 1;
-        }
         for (start; start < end; start += step) {
             ans.push(start);
         }
     } else if (start > end && step < 0) {
-        if (step === undefined) {
-            step = -1;
-        }
         for (start; start > end; start += step) {
             ans.push(start);
         }
