@@ -19,16 +19,19 @@ const operationsN = {
 
 button.onclick = () => {
     var string = inPut.value.toUpperCase().trim();
-    let bool;
+    var bool;
     for (let i in operationsN) {
         operationsN[i] = 0;
     }
+    console.log(operationsN);
     //inPut.value = "";
     console.log("Before: " + string);
-    bool, string = stringDepure(string);
+    var recipe = stringDepure(string);
+    bool = recipe[0];
+    string = recipe[1];
     if (bool) {
-        console.log(string, operationsN);
         outPut.innerHTML = string;
+        stringOperations(string);
     } else {
         outPut.innerHTML = string;
     }
@@ -64,14 +67,14 @@ function stringDepure(string) {
             string = string.trim();
         }
         if (lengthString >= 4) {
-            for (let i in operations) {
-                let j = operations[i].toUpperCase();
-                operationsN[operations[i]] += string.split(j).length - 1;
-                operationsN.nTotal += operationsN[operations[i]];
+            operations.forEach( i => {
+                let j = i.toUpperCase();
+                operationsN[i] += string.split(j).length - 1;
+                operationsN.nTotal += operationsN[i];
                 while (string.includes(j)) {
-                    string = string.replace(j, operations[i]);
+                    string = string.replace(j, i);
                 }
-            }
+            });
             if (operationsN.nTotal != 0) {
                 return true
             } else {
@@ -178,18 +181,18 @@ function stringDepure(string) {
         if (withOperations()) {
             if (checkParentheses()) {
                 if (checkOperations()) {
-                    return true, string;
+                    return [true, string];
                 } else {
-                    return false, "Mal ingreso de los parentesis o conjunto";
+                    return [false, "Mal ingreso de los parentesis o conjunto"];
                 }
             } else {
-                return false, "Mal ingreso de los parentesis o conjunto";
+                return [false, "Mal ingreso de los parentesis o conjunto"];
             }
         } else {
-            return false, "No ingresó una operación valida";
+            return [false, "No ingresó una operación valida"];
         }
     } else {
-        return false, "La operación no puede contener números";
+        return [false, "La operación no puede contener números"];
     }
 }
 /* Operation process*/
@@ -215,13 +218,15 @@ const $sets = {
     B: range(2, 10, 2),
     C: range(3, 7, 1)
 }
-/*
     //console.log(df.print());
     //console.log(df["A"].values.slice(0, -1));
     //;df.addColumn( {"column": "F", "value": [1, 2] });
-//stringOperations();
+    //stringOperations();
 
-function stringOperations() {
+function stringOperations(string) {
+    console.log("stringOperations");
+    var string = string;
+    const lengthString = string.length;
     const df = new dfd.DataFrame(
         math.boolean(math.zeros($sets.U.length, 4))._data,
         { columns: sets, index: $sets.U }
@@ -234,10 +239,9 @@ function stringOperations() {
         });
     });
     const dataOperations = new dfd.DataFrame(
-        math.boolean(math.zeros(operationsN.nTotal = 2, 2))._data,
+        math.boolean(math.zeros(operationsN.nTotal, 2))._data,
         { columns: ["position", "state"] }
     );
-    console.log(string);
     let count = 0;
     range(1, lengthString, 1).forEach(i => {
         if (operations.includes(string.slice(i, i + 2))) {
@@ -270,21 +274,9 @@ function stringOperations() {
         });
         return false;
     }
-    dataOperations["position"].values[0] = 1;
     console.log(dataOperations.print());
-    operationsN.nTotal = 2;
-    let nTotalCopy = operationsN.nTotal;
-    let psOfPaNCopy = operationsN.psOfPaN;
-    for (const k in range(1, operationsN.nTotal + 1, 1)) {
-        dataOperations["position"].values.forEach(i => {
-            console.log("i: " + i);
-        });
-    }
-    //console.log(dataOperations);
-    //console.log(dataOperations["position"].data);
-    console.log(df.print());
+    //console.log(df.print());
+    //let nTotalCopy = operationsN.nTotal;
+    //let psOfPaNCopy = operationsN.psOfPaN;
 
-    for (const v in range(1, operationsN.nTotal + 1, 1)) {
-
- 
-}*/
+}
