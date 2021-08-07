@@ -1,8 +1,10 @@
+//const math = require("mathjs");
+
 /*Problem variables*/
 const sets = ["U", "A", "B", "C"];
 const operations = ["un", "in", "di", "ds"];
-var string;
-var lengthString;
+var string = "(AunB)inC";
+var lengthString = string.length;
 /*ending on N means Number*/
 const operationsN = {
     un: 0,
@@ -201,6 +203,84 @@ function stringDepure() {
     }
 }
 /* Operation process*/
+function range(start, end, step) {
+    const ans = [];
+    if (start < end && step > 0) {
+        for (start; start < end; start += step) {
+            ans.push(start);
+        }
+    } else if (start > end && step < 0) {
+        for (start; start > end; start += step) {
+            ans.push(start);
+        }
+    }
+    return ans;
+}
+const $sets = {
+    U: range(1, 10, 1),
+    A: range(1, 5, 1),
+    B: range(2, 10, 2),
+    C: range(3, 7, 1)
+}
+
+    //console.log(df.print());
+    //console.log(df["A"].values.slice(0, -1));
+    ;//df.addColumn( {"column": "F", "value": [1, 2] });
+stringOperations();
 function stringOperations() {
-    /*Cuerpo de la función*/
+    const df = new dfd.DataFrame(
+        math.boolean(math.zeros($sets.U.length, 4))._data,
+        { columns: sets, index: $sets.U }
+    );
+    $sets.U.forEach(i => {
+        range(0, df.columns.length, 1).forEach(j => {
+            if ($sets[sets[j]].includes(i)) {
+                df.values[i - 1][j] = true;
+            }
+        });
+    });
+    const dataOperations = new dfd.DataFrame(
+        math.boolean(math.zeros(operationsN.nTotal = 2, 2))._data,
+        { columns: ["position", "state"] }
+    );
+    console.log(string);
+    var count = 0;
+    range(1, lengthString, 1).forEach(i => {
+        if (operations.includes(string.slice(i, i + 2))) {
+            dataOperations.values[count][0] = i;
+            count += 1;
+        }
+    });
+    const left = (i) => {
+        range(i - 1, -1, -1).forEach(j => {
+            df.columns.forEach( k => {
+                if (string.slice(j, i) == K) {
+                    return string.slice(j, i)
+                }
+            });
+        });
+        return false;
+    }
+    const right = (i) => {
+        range(i + 2, lengthString + 1, 1).forEach(j => {
+            df.columns.forEach(k => {
+                if (lengthString == j) {
+                    if (string[-1] == k) {
+                        return string[-1];
+                    }
+                } else if (string.slice(i + 2, j) == k) {
+                    return string.slice(i + 2, j);
+                }
+            });
+        });
+        return false;
+    }
+    dataOperations["position"].values[0] = 1;
+    console.log(dataOperations.print());
+    let nTotalCopy = operationsN.nTotal;
+    let psOfPaNCopy = operationsN.psOfPaN;
+
+    /*for (const v in range(1, operationsN.nTotal + 1, 1)) {
+
+    }*/
 }
