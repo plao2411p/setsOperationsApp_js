@@ -222,7 +222,6 @@ const $sets = {
 }
 
 function stringOperations(string) {
-    console.log("stringOperations");
     var string = string;
     const lengthString = string.length;
     const df = new dfd.DataFrame(
