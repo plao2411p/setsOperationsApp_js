@@ -53,7 +53,7 @@ function stringDepure(string) {
         return true;
     }
     const withOperations = () => {
-        if (lengthString == 1) {
+        if (lengthString === 1) {
             for (let i in sets) {
                 if (string.includes(sets[i])) {
                     operationsN.nTotal += 1;
@@ -61,13 +61,13 @@ function stringDepure(string) {
                 }
             }
         }
-        if (lengthString == 6 && string[0] == "(" && string[5] == ")") {
+        if (lengthString == 6 && string[0] === "(" && string[5] === ")") {
             string = string.replace("(", " ");
             string = string.replace(")", " ");
             string = string.trim();
         }
         if (lengthString >= 4) {
-            operations.forEach( i => {
+            operations.forEach(i => {
                 let j = i.toUpperCase();
                 operationsN[i] += string.split(j).length - 1;
                 operationsN.nTotal += operationsN[i];
@@ -86,15 +86,15 @@ function stringDepure(string) {
         }
     }
     const checkParentheses = () => {
-        if (lengthString == 1) {
+        if (lengthString === 1) {
             return true;
         }
         var leftCount = 0;
         var rightCount = 0;
         operationsN.psOfPaN = string.split("(").length + string.split(")").length - 2;
-        if (operationsN.psOfPaN == 0 && operationsN.nTotal == 1) {
+        if (operationsN.psOfPaN === 0 && operationsN.nTotal === 1) {
             return true;
-        } else if (operationsN.psOfPaN % 2 == 0) {
+        } else if (operationsN.psOfPaN % 2 === 0) {
             operationsN.psOfPaN /= 2;
             if (operationsN.psOfPaN + 1 != operationsN.nTotal) {
                 return false;
@@ -102,48 +102,48 @@ function stringDepure(string) {
         } else {
             return false;
         }
-        if (string[0] == "(") {
-            if (sets.includes(string[1]) || string[1] == "(") {
+        if (string[0] === "(") {
+            if (sets.includes(string[1]) || string[1] === "(") {
                 rightCount += 1;
             } else {
                 return false;
             }
         }
-        if (string[1] == "(") {
-            if (string[0] == "(") {
+        if (string[1] === "(") {
+            if (string[0] === "(") {
                 rightCount += 1;
             } else {
                 return false;
             }
         }
-        if (string[lengthString - 1] == ")") {
-            if (sets.includes(string[lengthString - 2]) || string[lengthString - 2] == ")") {
+        if (string[lengthString - 1] === ")") {
+            if (sets.includes(string[lengthString - 2]) || string[lengthString - 2] === ")") {
                 leftCount += 1;
             } else {
                 return false;
             }
         }
-        if (string[lengthString - 2] == ")") {
-            if (string[lengthString - 1] == ")") {
+        if (string[lengthString - 2] === ")") {
+            if (string[lengthString - 1] === ")") {
                 leftCount += 1;
             }
         }
         for (let i = 2; i < lengthString - 2; i++) {
-            if (string[i] == "(") {
-                if (string[i + 1] == "(" || sets.includes(string[i + 1])) {
+            if (string[i] === "(") {
+                if (string[i + 1] === "(" || sets.includes(string[i + 1])) {
                 } else { return false; }
-                if (string[i - 1] == "(" || operations.includes(string.slice(i - 2, i))) {
+                if (string[i - 1] === "(" || operations.includes(string.slice(i - 2, i))) {
                 } else { return false; }
                 rightCount += 1;
-            } else if (string[i] == ")") {
-                if (string[i - 1] == ")" || sets.includes(string[i - 1])) {
+            } else if (string[i] === ")") {
+                if (string[i - 1] === ")" || sets.includes(string[i - 1])) {
                 } else { return false; }
-                if (string[i + 1] == ")" || operations.includes(string.slice(i + 1, i + 3))) {
+                if (string[i + 1] === ")" || operations.includes(string.slice(i + 1, i + 3))) {
                 } else { return false; }
                 leftCount += 1
             }
         }
-        if (leftCount + rightCount == 2 * operationsN.psOfPaN) {
+        if (leftCount + rightCount === 2 * operationsN.psOfPaN) {
             return true;
         } else { return false; }
     }
@@ -169,9 +169,9 @@ function stringDepure(string) {
         }
         for (let i = 1; i < lengthString - 1; i++) {
             if (sets.includes(string.slice(i, i + 2))) {
-                if (sets.includes(string[i - 1]) || string[i - 1] == "(" || string[i - 1] == ")") {
+                if (sets.includes(string[i - 1]) || string[i - 1] === "(" || string[i - 1] === ")") {
                 } else { return false; }
-                if (sets.includes(string[i + 2]) || string[i + 2] == "(" || string[i + 2] == ")") {
+                if (sets.includes(string[i + 2]) || string[i + 2] === "(" || string[i + 2] === ")") {
                 } else { return false; }
             }
         }
@@ -198,9 +198,12 @@ function stringDepure(string) {
 /* Operation process*/
 function range(start, end, step) {
     const ans = [];
-    if (start < end) {
+    if ((start < end) && (step === undefined)) {
         step = 1;
-    } else { step = -1; }
+    }
+    if ((start > end) && (step === undefined)) {
+        step = -1;
+    }
     if (start < end && step > 0) {
         for (start; start < end; start += step) {
             ans.push(start);
@@ -218,10 +221,10 @@ const $sets = {
     B: range(2, 10, 2),
     C: range(3, 7, 1)
 }
-    //console.log(df.print());
-    //console.log(df["A"].values.slice(0, -1));
-    //;df.addColumn( {"column": "F", "value": [1, 2] });
-    //stringOperations();
+//console.log(df.print());
+//console.log(df["A"].values.slice(0, -1));
+//;df.addColumn( {"column": "F", "value": [1, 2] });
+//stringOperations();
 
 function stringOperations(string) {
     console.log("stringOperations");
@@ -249,34 +252,102 @@ function stringOperations(string) {
             count += 1;
         }
     });
-    const left = (i) => {
-        range(i - 1, -1, -1).forEach(j => {
-            df.columns.forEach(k => {
-                if (string.slice(j, i) == K) {
-                    return string.slice(j, i)
+    const $left = (i) => {
+        for (let j  = i - 1; j > -1; j-- ) {
+            for (let k in df.columns) {
+                if (string.slice(j, i) == df.columns[k]) {                
+                    return df.columns[k];
                 }
-            });
-        });
+            }
+        }
         return false;
     }
-    const right = (i) => {
-        range(i + 2, lengthString + 1, 1).forEach(j => {
-            df.columns.forEach(k => {
-                if (lengthString == j) {
-                    if (string[-1] == k) {
-                        return string[-1];
+    const $right = (i) => {
+        for (let j  = i + 2; j < lengthString +1 ; j++) {
+            for (let k in df.columns) {
+                if (lengthString === j) {
+                    if (string[lengthString - 1] == df.columns[k]) {
+                        return df.columns[k];
                     }
                 }
-                if (string.slice(i + 2, j) == k) {
-                    return string.slice(i + 2, j);
+                if (string.slice(i + 2, j + 1) == df.columns[k]) {
+                    return df.columns[k];
                 }
-            });
-        });
+            }
+        }
         return false;
     }
-    console.log(dataOperations.print());
+    const operator = (i, o, d) => {
+        var i = i;
+        var o = o;
+        var d = d;
+        var result = [];
+        var p = [];
+        var q = [];
+        df.index.forEach( j => {
+            j -= 1;
+            p.push(df.values[j][df.columns.indexOf(i)]);
+            q.push  (df.values[j][df.columns.indexOf(d)]);
+        });
+        df.index.forEach(j => {
+            j -= 1;
+            if (o === "un") {
+                if (p[j] || q[j]) {
+                    result.push(true);
+                } else { result.push(false); }
+            } else if (o === "in") {
+                if (p[j] && q[j]) {
+                    result.push(true);
+                } else { result.push(false); }
+            } else if (o === "di") {
+                if (p[j] && !(q[j])) {
+                    result.push(true);
+                } else { result.push(false); }
+            } else if (o === "ds") {
+                if ((p[j] || q[j]) && !(p[j] && q[j])) {
+                    result.push(true);
+                } else { result.push(false); }
+            }
+        });
+        return result;
+    }
+    
+    var nTotalCopy = operationsN.nTotal;
+    var psOfPaNCopy = operationsN.psOfPaN;
+    /*operationsN.nTotal + 1*/
+    range(1, operationsN.nTotal + 1, 1).forEach( v => {
+        dataOperations.index.forEach( l => {
+            var i = dataOperations.values[l][0];
+            if (dataOperations.values[l][1] == false) {
+                var left = $left(i);
+                var right = $right(i);
+                var op = string.slice(i, i + 2);
+                if (left != false && right != false) {
+                    var ans = operator(left, op, right);
+                    if (nTotalCopy === 1 && psOfPaNCopy == 0) {
+                        dataOperations.values[l][1] = true;
+                        df.addColumn( {"column": left + op + right, "value": ans });
+                        nTotalCopy -= 1;
+                        psOfPaNCopy -= 1;
+                    } else if (psOfPaNCopy > 0) {
+                        dataOperations.values[l][1] = true;
+                        df.addColumn( {"column": "(" + left + op + right + ")", "value": ans });
+                        nTotalCopy -= 1;
+                        psOfPaNCopy -= 1;
+                    } else {
+                        dataOperations.values[l][1] = true;
+                        df.addColumn( {"column": left + op + right, "value": ans });
+                        nTotalCopy -= 1;
+                        psOfPaNCopy -= 1;
+                    }
+                }
+            }
+        });
+    });
+    //console.log(dataOperations.print());
+    console.log(String(df));
+    //console.log(df.columns);
+    //dataOperations.index.forEach(i => { console.log(i) });
     //console.log(df.print());
-    //let nTotalCopy = operationsN.nTotal;
-    //let psOfPaNCopy = operationsN.psOfPaN;
 
 }
