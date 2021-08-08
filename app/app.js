@@ -341,8 +341,8 @@ function stringOperations(string) {
     df.plot("table").table(
         { header_style: 
             {align: "center",
-            fill: { color: ['gray'] },
-            font: { family: "Arial", size: 15, color: "white" }}, 
+            fill: { color: ['black'] },
+            font: { family: "Arial", size: 10, color: "white" }}, 
         cell_style: 
             {align: ["center"],
             line: { color: "black", width: 1 }} 
