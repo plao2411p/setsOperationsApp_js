@@ -24,7 +24,6 @@ const $sets = {
     B: range(2, 10, 2),
     C: range(3, 7, 1)
 }
-console.log(conjuntos);
 for (const i in $sets) {
     conjuntos.innerHTML += 
     "<li>" + 
