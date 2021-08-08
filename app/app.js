@@ -4,6 +4,7 @@ const button = document.getElementById("Button");
 const inPut = document.getElementById("InPut");
 const outPut = document.getElementById("OutPut");
 const table = document.getAnimations("table");
+const conjuntos = document.getElementById("conjuntos");
 
 /*Problem variables*/
 const sets = ["U", "A", "B", "C"];
@@ -16,6 +17,20 @@ const operationsN = {
     ds: 0,
     nTotal: 0,
     psOfPaN: 0 // Pairs of parentheses N
+}
+const $sets = {
+    U: range(1, 10, 1),
+    A: range(1, 5, 1),
+    B: range(2, 10, 2),
+    C: range(3, 7, 1)
+}
+console.log(conjuntos);
+for (const i in $sets) {
+    conjuntos.innerHTML += 
+    "<li>" + 
+    i + " = " + "[" + $sets[i] + "]" 
+    + 
+    "</li>";    
 }
 
 button.onclick = () => {
@@ -214,12 +229,6 @@ function range(start, end, step) {
         }
     }
     return ans;
-}
-const $sets = {
-    U: range(1, 10, 1),
-    A: range(1, 5, 1),
-    B: range(2, 10, 2),
-    C: range(3, 7, 1)
 }
 
 function stringOperations(string) {
