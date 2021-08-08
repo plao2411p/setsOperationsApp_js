@@ -3,6 +3,7 @@
 const button = document.getElementById("Button");
 const inPut = document.getElementById("InPut");
 const outPut = document.getElementById("OutPut");
+const table = document.getAnimations("table");
 
 /*Problem variables*/
 const sets = ["U", "A", "B", "C"];
@@ -23,9 +24,7 @@ button.onclick = () => {
     for (let i in operationsN) {
         operationsN[i] = 0;
     }
-    console.log(operationsN);
-    //inPut.value = "";
-    console.log("Before: " + string);
+    inPut.value = "";
     var recipe = stringDepure(string);
     bool = recipe[0];
     string = recipe[1];
@@ -221,10 +220,6 @@ const $sets = {
     B: range(2, 10, 2),
     C: range(3, 7, 1)
 }
-//console.log(df.print());
-//console.log(df["A"].values.slice(0, -1));
-//;df.addColumn( {"column": "F", "value": [1, 2] });
-//stringOperations();
 
 function stringOperations(string) {
     console.log("stringOperations");
@@ -344,10 +339,5 @@ function stringOperations(string) {
             }
         });
     });
-    //console.log(dataOperations.print());
-    console.log(String(df));
-    //console.log(df.columns);
-    //dataOperations.index.forEach(i => { console.log(i) });
-    //console.log(df.print());
-
+    df.plot("table").table();
 }
