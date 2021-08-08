@@ -29,8 +29,9 @@ button.onclick = () => {
     bool = recipe[0];
     string = recipe[1];
     if (bool) {
+        string = stringOperations(string);
         outPut.innerHTML = string;
-        stringOperations(string);
+        
     } else {
         outPut.innerHTML = string;
     }
@@ -239,7 +240,7 @@ function stringOperations(string) {
         math.boolean(math.zeros(operationsN.nTotal, 2))._data,
         { columns: ["position", "state"] }
     );
-    let count = 0;
+    var count = 0;
     range(1, lengthString, 1).forEach(i => {
         if (operations.includes(string.slice(i, i + 2))) {
             dataOperations.values[count][0] = i;
@@ -338,6 +339,13 @@ function stringOperations(string) {
             }
         });
     });
+    count = [];
+    df.index.forEach( i => {
+        i -= 1;
+        if (df.values[i][df.columns.length - 1]) {
+            count.push(i + 1);
+        }
+    });
     df.plot("table").table(
         { 
         header_style: 
@@ -349,4 +357,5 @@ function stringOperations(string) {
             line: { color: "black", width: 1 }},
         responsive: true
         });
+    return string + " = [" + count + "]";
 }
