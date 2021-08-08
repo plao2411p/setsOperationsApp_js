@@ -339,12 +339,14 @@ function stringOperations(string) {
         });
     });
     df.plot("table").table(
-        { header_style: 
+        { 
+        header_style: 
             {align: "center",
             fill: { color: ['black'] },
             font: { family: "Arial", size: 10, color: "white" }}, 
         cell_style: 
             {align: ["center"],
-            line: { color: "black", width: 1 }} 
+            line: { color: "black", width: 1 }},
+        responsive: true
         });
 }
