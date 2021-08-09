@@ -347,10 +347,11 @@ function stringOperations(string) {
             }
         });
     });
+    df.addColumn({"column": "Elementos", "value": $sets["U"]});
     count = [];
     df.index.forEach( i => {
         i -= 1;
-        if (df.values[i][df.columns.length - 1]) {
+        if (df.values[i][df.columns.length - 2]) {
             count.push(i + 1);
         }
     });
