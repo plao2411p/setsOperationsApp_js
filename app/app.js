@@ -1,5 +1,5 @@
 "use strict";
-/*Html elements to intetact*/
+/*Html elements to interact*/
 const button = document.getElementById("Button");
 const inPut = document.getElementById("InPut");
 const outPut = document.getElementById("OutPut");
@@ -25,11 +25,11 @@ const $sets = {
     C: range(3, 7, 1)
 }
 for (const i in $sets) {
-    conjuntos.innerHTML += 
-    "<li>" + 
-    i + " = " + "[" + $sets[i] + "]" 
-    + 
-    "</li>";    
+    conjuntos.innerHTML +=
+        "<li>" +
+        i + " = " + "[" + $sets[i] + "]"
+        +
+        "</li>";
 }
 
 button.onclick = () => {
@@ -45,7 +45,7 @@ button.onclick = () => {
     if (bool) {
         string = stringOperations(string);
         outPut.innerHTML = string;
-        
+
     } else {
         outPut.innerHTML = string;
     }
@@ -197,10 +197,10 @@ function stringDepure(string) {
                 if (checkOperations()) {
                     return [true, string];
                 } else {
-                    return [false, "Mal ingreso de los parentesis o conjunto"];
+                    return [false, "Mal ingreso de los paréntesis o conjunto"];
                 }
             } else {
-                return [false, "Mal ingreso de los parentesis o conjunto"];
+                return [false, "Mal ingreso de los paréntesis o conjunto"];
             }
         } else {
             return [false, "No ingresó una operación valida"];
@@ -256,9 +256,9 @@ function stringOperations(string) {
         }
     });
     const $left = (i) => {
-        for (let j  = i - 1; j > -1; j-- ) {
+        for (let j = i - 1; j > -1; j--) {
             for (let k in df.columns) {
-                if (string.slice(j, i) == df.columns[k]) {                
+                if (string.slice(j, i) == df.columns[k]) {
                     return df.columns[k];
                 }
             }
@@ -266,7 +266,7 @@ function stringOperations(string) {
         return false;
     }
     const $right = (i) => {
-        for (let j  = i + 2; j < lengthString +1 ; j++) {
+        for (let j = i + 2; j < lengthString + 1; j++) {
             for (let k in df.columns) {
                 if (lengthString === j) {
                     if (string[lengthString - 1] == df.columns[k]) {
@@ -287,10 +287,10 @@ function stringOperations(string) {
         var result = [];
         var p = [];
         var q = [];
-        df.index.forEach( j => {
+        df.index.forEach(j => {
             j -= 1;
             p.push(df.values[j][df.columns.indexOf(i)]);
-            q.push  (df.values[j][df.columns.indexOf(d)]);
+            q.push(df.values[j][df.columns.indexOf(d)]);
         });
         df.index.forEach(j => {
             j -= 1;
@@ -314,12 +314,12 @@ function stringOperations(string) {
         });
         return result;
     }
-    
+
     var nTotalCopy = operationsN.nTotal;
     var psOfPaNCopy = operationsN.psOfPaN;
     /*operationsN.nTotal + 1*/
-    range(1, operationsN.nTotal + 1, 1).forEach( v => {
-        dataOperations.index.forEach( l => {
+    range(1, operationsN.nTotal + 1, 1).forEach(v => {
+        dataOperations.index.forEach(l => {
             var i = dataOperations.values[l][0];
             if (dataOperations.values[l][1] == false) {
                 var left = $left(i);
@@ -329,17 +329,17 @@ function stringOperations(string) {
                     var ans = operator(left, op, right);
                     if (nTotalCopy === 1 && psOfPaNCopy == 0) {
                         dataOperations.values[l][1] = true;
-                        df.addColumn( {"column": left + op + right, "value": ans });
+                        df.addColumn({ "column": left + op + right, "value": ans });
                         nTotalCopy -= 1;
                         psOfPaNCopy -= 1;
                     } else if (psOfPaNCopy > 0) {
                         dataOperations.values[l][1] = true;
-                        df.addColumn( {"column": "(" + left + op + right + ")", "value": ans });
+                        df.addColumn({ "column": "(" + left + op + right + ")", "value": ans });
                         nTotalCopy -= 1;
                         psOfPaNCopy -= 1;
                     } else {
                         dataOperations.values[l][1] = true;
-                        df.addColumn( {"column": left + op + right, "value": ans });
+                        df.addColumn({ "column": left + op + right, "value": ans });
                         nTotalCopy -= 1;
                         psOfPaNCopy -= 1;
                     }
@@ -347,24 +347,28 @@ function stringOperations(string) {
             }
         });
     });
-    df.addColumn({"column": "Elementos", "value": $sets["U"]});
+    df.addColumn({ "column": "Elementos", "value": $sets["U"] });
     count = [];
-    df.index.forEach( i => {
+    df.index.forEach(i => {
         i -= 1;
         if (df.values[i][df.columns.length - 2]) {
             count.push(i + 1);
         }
     });
     df.plot("table").table(
-        { 
-        header_style: 
-            {align: "center",
-            fill: { color: ['black'] },
-            font: { family: "Arial", size: 10, color: "white" }}, 
-        cell_style: 
-            {align: ["center"],
-            line: { color: "black", width: 1 }},
-        responsive: true
+        {
+            header_style:
+            {
+                align: "center",
+                fill: { color: ['black'] },
+                font: { family: "Arial", size: 10, color: "white" }
+            },
+            cell_style:
+            {
+                align: ["center"],
+                line: { color: "black", width: 1 }
+            },
+            responsive: true
         });
     return string + " = [" + count + "]";
 }
