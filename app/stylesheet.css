@@ -1,1 +1,17 @@
 /* */
+body {
+    margin: auto;
+    background-color: aliceblue;
+}
+div {
+    border: 2px dotted blue;
+}
+.content {
+    margin: 5px 20%;
+}
+ul {
+    margin: 5px 50px;
+}
+#table {
+    margin: 5px 20%;
+}
