@@ -3,7 +3,7 @@
 const button = document.getElementById("Button");
 const inPut = document.getElementById("InPut");
 const outPut = document.getElementById("OutPut");
-const table = document.getAnimations("table");
+//const table = document.getAnimations("table");
 const conjuntos = document.getElementById("conjuntos");
 
 /*Problem variables*/
@@ -44,9 +44,11 @@ button.onclick = () => {
     string = recipe[1];
     if (bool) {
         string = stringOperations(string);
+        outPut.style = "color: green; text-align: center"
         outPut.innerHTML = string;
 
     } else {
+        outPut.style = "color: red; text-align: center"
         outPut.innerHTML = string;
     }
 
@@ -355,6 +357,7 @@ function stringOperations(string) {
             count.push(i + 1);
         }
     });
+    /*
     df.plot("table").table(
         {
             header_style:
@@ -369,6 +372,6 @@ function stringOperations(string) {
                 line: { color: "black", width: 1 }
             },
             responsive: true
-        });
+        }); */
     return string + " = [" + count + "]";
 }
